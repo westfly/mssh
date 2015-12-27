@@ -19,8 +19,8 @@ function pssh_login()
     python bin/pssh -t -1 -l $user -h $deploy -C $passwd -x "-o StrictHostKeyChecking=no" -i "$*"
     return 0;
 }
-user_list="adwl"
-password_list="adwl2015"
+user_list="yourself"
+password_list="2015pass"
 for user in ${user_list[*]}
 do
     for passwd in ${password_list[*]}
