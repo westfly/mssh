@@ -1,0 +1,31 @@
+#!/bin/bash
+#host_file=$1
+#shift 1
+function usage()
+{
+    echo " supper"
+}
+
+while getopts  :c:f:F:r:l:h  opt
+do
+  case  "$opt"   in
+  c)   cmd_script=$OPTARG; echo $cmd_script ;;
+  f)   host_file=$OPTARG ;;
+  F)   host_list=$OPTARG; echo $host_list ;;
+  r)   remote_file=$OPTARG; echo $remote_file ;;
+  l)   local_file=$OPTARG; echo $local_file ;;
+  h)   usage ; exit ;;
+  *)   echo  "unknown  option : $opt"
+  esac
+done
+#cmd_cmd=$*
+if [[ x"$host_file" != "x" ]]; then
+  host_list=$(cat "$host_file" | awk '{print $1}')
+fi
+set -x
+#echo $host_list | while read host
+for host in ${host_list[@]}
+do
+    echo $local_file $host:$remote_file
+    scp $local_file $host:$remote_file
+done
